@@ -78,7 +78,7 @@ int quiesce(struct board_info *board, int alpha, int beta, int depth, int depthl
         }
         else
         { // a move that didn't raise alpha
-            if (evl < alpha)
+            if (evl <= alpha)
             {
                 return evl;
             }
@@ -277,7 +277,7 @@ int alphabeta(struct board_info *board, struct movelist *movelst, int *key, int 
         }
         else
         { // a move that didn't raise alpha
-            if (evl < alpha)
+            if (evl <= alpha)
             {
                 return evl;
             }
