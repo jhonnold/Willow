@@ -658,13 +658,11 @@ int alphabeta(struct board_info *board, struct movelist *movelst, int *key, int 
                     lastpiecetype = board->board[movelst[(*key-2)].move.move & 0xFF] / 2 - 1, lastsquare = movelst[(*key-2)].move.move & 0xFF;
                     thread_info->COUNTERMOVES[(board->board[movelst[(*key) - 2].move.move & 0xFF] >> 1) - 1][movelst[(*key) - 2].move.move & 0xFF] = list[i].move;
                 }
+
                 if (!ismatch(thread_info->KILLERTABLE[depth][0], list[i].move))
                 {
+                    thread_info->KILLERTABLE[depth][1] = thread_info->KILLERTABLE[depth][0];
                     thread_info->KILLERTABLE[depth][0] = list[i].move;
-                }
-                else if (!ismatch(thread_info->KILLERTABLE[depth][1], list[i].move))
-                {
-                    thread_info->KILLERTABLE[depth][1] = list[i].move;
                 }
 
                 updateHistory(thread_info->HISTORYTABLE[color][(list[i].move.move >> 8)][list[i].move.move & 0xFF], c);
