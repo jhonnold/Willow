@@ -140,6 +140,21 @@ int quiesce(struct board_info *board, int alpha, int beta, int depth, int depthl
             }
         }
 
+        if (bestscore > -99900) // avoided mate
+        {
+            if (incheck && list[i].eval > -32769 && list[i].eval < 1000200) // incheck quiet move
+            {
+                i++;
+                continue;
+            }
+
+            if (!static_exchange_evaluation(board, list[i].move, color, 0))
+            {
+                i++;
+                continue;
+            }
+        }
+
         struct board_info board2 = *board;
 
         if (move(&board2, list[i].move, color, thread_info))
